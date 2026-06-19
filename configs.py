@@ -1,0 +1,43 @@
+PAD_IDX = 0
+
+UNK_IDX = 1
+
+BOS_IDX = 2
+
+EOS_IDX = 3
+
+
+
+SRC_MAX_LEN = 768
+
+TGT_MAX_LEN = 512
+
+
+
+VOCAB_SIZE = 24000
+
+
+
+EMBED_SIZE = 384
+
+HEADS = 6
+
+NUM_LAYERS = 4
+
+FORWARD_EXPANSION = 4
+
+DROPOUT = 0.1
+
+
+
+BATCH_SIZE = 32
+
+LR = 3e-4
+
+WEIGHT_DECAY = 0.01
+
+EPOCHS = 50
+
+
+
+DEVICE="cpu"
