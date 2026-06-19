@@ -30,7 +30,7 @@ DROPOUT = 0.1
 
 
 
-BATCH_SIZE = 32
+BATCH_SIZE = 8
 
 LR = 3e-4
 
