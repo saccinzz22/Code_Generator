@@ -57,6 +57,11 @@ def main():
     os.makedirs("checkpoints", exist_ok=True)
     best_val_loss=float("inf")
     
+    CHECKPOINT_DIR = "/content/drive/MyDrive/Code_Generator/checkpoints"
+    os.makedirs(
+            CHECKPOINT_DIR,
+            exist_ok=True
+    )
     for epoch in range(EPOCHS):
         print()
         print("="*50)
@@ -67,10 +72,11 @@ def main():
         print()
         print(f"Train Loss : {train_loss:.4f}")
         print(f"Val Loss   : {val_loss:.4f}")
-        trainer.save_checkpoint(path=f"checkpoints/epoch_{epoch+1}.pt", epoch=epoch+1, train_loss=train_loss, val_loss=val_loss)
+
+        trainer.save_checkpoint(path=f"{CHECKPOINT_DIR}/epoch_{epoch+1}.pt", epoch=epoch+1, train_loss=train_loss, val_loss=val_loss)
         if val_loss < best_val_loss:
             best_val_loss=val_loss
-            trainer.save_checkpoint(path="checkpoints/best.pt", epoch=epoch+1, train_loss=train_loss, val_loss=val_loss)
+            trainer.save_checkpoint(path=f"{CHECKPOINT_DIR}/best.pt", epoch=epoch+1, train_loss=train_loss, val_loss=val_loss)
             print()
             print("Best model saved.")
         scheduler.step()

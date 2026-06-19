@@ -47,17 +47,23 @@ class Trainer:
         return avg_loss
     
     def save_checkpoint(self, path, epoch, train_loss, val_loss):
-        torch.save({"epoch": epoch, 
-                    "train_loss": train_loss, 
-                    "val_loss": val_loss, 
-                    "model_state_dict": self.model.state_dict(),
-                    "optimizer_state_dict": self.optimizer.state_dict()},
-                    path)
+        checkpoint={
+            "epoch": epoch, 
+            "train_loss": train_loss, 
+            "val_loss": val_loss, 
+            "model_state_dict": self.model.state_dict(),
+            "optimizer_state_dict": self.optimizer.state_dict()
+            }
+        if self.scheduler is not None:
+            checkpoint["scheduler_state_dict"]=(self.scheduler.state_dict())
+        torch.save(checkpoint, path)
         
     def load_checkpoint(self, path):
         checkpoint=torch.load(path, map_location=self.device)
         self.model.load_state_dict(checkpoint["model_state_dict"])
         self.optimizer.load_state_dict(checkpoint["optimizer_state_dict"])
+        if self.scheduler is not None and "scheduler_state_dict" in checkpoint:
+            self.scheduler.load_state_dict(checkpoint["scheduler_state_dict"])
         epoch=checkpoint["epoch"]
         train_loss=checkpoint["train_loss"]
         val_loss=checkpoint["val_loss"]
