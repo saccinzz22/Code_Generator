@@ -12,8 +12,7 @@ checkpoints/
 # Raw and Processed Datasets
 datasets/
 preprocessing/final_dataset.jsonl
-preprocessing/train.jsonl
-preprocessing/val.jsonl
+
 
 # Tokenizer Training Corpus
 tokenizer/all_text.txt
