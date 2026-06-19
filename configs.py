@@ -40,4 +40,4 @@ EPOCHS = 50
 
 
 
-DEVICE="cpu"
+DEVICE="cuda"
