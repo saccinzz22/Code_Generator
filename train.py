@@ -57,7 +57,7 @@ def main():
     os.makedirs("checkpoints", exist_ok=True)
     best_val_loss=float("inf")
     
-    CHECKPOINT_DIR = "/content/drive/MyDrive/Code_Generator/checkpoints"
+    CHECKPOINT_DIR = "/content/drive/MyDrive/code_generator_weights"
     os.makedirs(
             CHECKPOINT_DIR,
             exist_ok=True
