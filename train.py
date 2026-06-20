@@ -54,7 +54,6 @@ def main():
     criterion=nn.CrossEntropyLoss(ignore_index=PAD_IDX, label_smoothing=0.1)
     trainer=Trainer(model=model, optimizer=optimizer, criterion=criterion, device=device, scheduler=scheduler)
     
-    os.makedirs("checkpoints", exist_ok=True)
     best_val_loss=float("inf")
     
     CHECKPOINT_DIR = "/content/drive/MyDrive/code_generator_weights"
@@ -62,7 +61,17 @@ def main():
             CHECKPOINT_DIR,
             exist_ok=True
     )
-    for epoch in range(EPOCHS):
+    
+    checkpoint_path = ("/content/drive/MyDrive/code_generator_weights/best.pt")
+    start_epoch, train_loss, val_loss = (
+        trainer.load_checkpoint(checkpoint_path)
+    )
+    best_val_loss = val_loss
+    print(f"Resuming from epoch {start_epoch}")
+    print(f"Train loss: {train_loss:.4f}")
+    print(f"Val loss: {val_loss:.4f}")
+    
+    for epoch in range(start_epoch, EPOCHS):
         print()
         print("="*50)
         print(f"Epoch {epoch+1}/{EPOCHS}")
